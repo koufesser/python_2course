@@ -6,6 +6,7 @@ from hw_01 import easy
 graph = graphviz.Graph()
 cnt = 0
 
+
 class NodeVisitor:
     def visit(self, node):
         global cnt
