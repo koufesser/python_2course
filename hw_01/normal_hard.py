@@ -1,7 +1,7 @@
 import graphviz
 import ast
 import inspect
-import easy
+from hw_01 import easy
 
 graph = graphviz.Graph()
 cnt = 0
