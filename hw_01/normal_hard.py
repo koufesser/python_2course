@@ -49,7 +49,12 @@ def nodename(node):
     return (name, color, shape)
 
 
-ast_obj = ast.parse(inspect.getsource(easy.fibonacci))
-n = NodeVisitor()
-n.visit(ast_obj)
-graph.render(directory='artifacts')
+def fibonacciast():
+    ast_obj = ast.parse(inspect.getsource(easy.fibonacci))
+    n = NodeVisitor()
+    n.visit(ast_obj)
+    graph.render(directory='artifacts')
+
+
+if __name__ == "main":
+    fibonacciast()
