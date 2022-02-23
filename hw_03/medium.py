@@ -31,7 +31,7 @@ class SetMixin(CommonClass):
 
 class MatrixLike(np.lib.mixins.NDArrayOperatorsMixin, StrMixin, GetMixin, FPrintMixin):
     def __init__(self, value):
-        super.__init__()
+        super().__init__()
         if isinstance(value, np.ndarray):
             self.value = value
         else:
