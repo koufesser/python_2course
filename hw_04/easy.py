@@ -1,6 +1,6 @@
 import time
-import concurrent.futures
-
+import threading
+import multiprocessing
 
 def fibonacci(n):
     prev = 0
@@ -17,22 +17,32 @@ def count_time(func, arg):
 
 
 def call_pure_fibonacci(arg):
-    ans = list(map(fibonacci, arg))
-    return ans
+    for i in range(15):
+        fibonacci(arg)
 
 
 def call_thread_fibonacci(arg):
-    ans = list(concurrent.futures.ThreadPoolExecutor(max_workers=10).map(fibonacci, arg))
-    return ans
+    ar = []
+    for i in range(15):
+        t = threading.Thread(target=fibonacci, args=(arg,))
+        t.start()
+        ar.append(t)
+    for i in ar:
+        i.join()
 
 
 def call_process_fibonacci(arg):
-    ans = list(concurrent.futures.ProcessPoolExecutor(max_workers=10).map(fibonacci, arg))
-    return ans
+    ar = []
+    for i in range(15):
+        m = multiprocessing.Process(target=fibonacci, args=(arg, ))
+        m.start()
+        ar.append(m)
+    for i in ar:
+        i.join()
 
 
 if __name__ == '__main__':
-    arg = [100, 2000, 30000, 400000, 500000, 100, 2000, 30000, 400000, 500000, ]
+    arg = 100000
     file = open('artifacts/easy.txt', 'w')
     file.write(f'pure python: {count_time(call_pure_fibonacci, arg)}\n')
     file.write(f'Treads: {count_time(call_thread_fibonacci, arg)}\n')

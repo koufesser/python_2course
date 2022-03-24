@@ -3,7 +3,7 @@ import time
 import concurrent.futures as con
 
 
-def integrate(f, a, b, exec, n_iter=1000 ):
+def integrate(f, a, b, exec, n_iter=10 ** 8):
     step = (b - a) / n_iter
     arr = []
     for i in range(n_iter):
